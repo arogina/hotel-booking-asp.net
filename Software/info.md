@@ -1,1 +1,1 @@
-This is a folder that contains software files.
+This is the folder that contains software files.

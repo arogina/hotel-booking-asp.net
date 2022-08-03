@@ -25,5 +25,10 @@ namespace BLL
                 return Convert.ToBase64String(rfc.GetBytes(16));
             }
         }
+
+        public static bool IsEqualPassword (string password, string salt, string hashedPassword)
+        {
+            return HashPassword(password, salt) == hashedPassword;
+        }
     }
 }

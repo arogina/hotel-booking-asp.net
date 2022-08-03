@@ -16,3 +16,8 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.carousel-custom {
+    max-width: 900px;
+    margin-top: 50px;
+}

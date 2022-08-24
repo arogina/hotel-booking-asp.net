@@ -1,0 +1,50 @@
+﻿@model HotelBookingMVC.Models.RegistracijaModel
+
+@{
+    ViewData["Title"] = "Registracija";
+}
+
+<h1 class="text-center title">Registracija</h1>
+
+<div class="d-flex justify-content-center">
+    <div class="row w-30">
+        <div class="col">
+            <form asp-action="Register" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Ime" class="control-label"></label>
+                    <input asp-for="Ime" class="form-control" />
+                    <span asp-validation-for="Ime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Prezime" class="control-label"></label>
+                    <input asp-for="Prezime" class="form-control" />
+                    <span asp-validation-for="Prezime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Lozinka" class="control-label"></label>
+                    <input asp-for="Lozinka" class="form-control" />
+                    <span asp-validation-for="Lozinka" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PonovljenaLozinka" class="control-label"></label>
+                    <input asp-for="PonovljenaLozinka" class="form-control" />
+                    <span asp-validation-for="PonovljenaLozinka" class="text-danger"></span>
+                </div>
+                <div class="form-group submit-btn">
+                    <input type="submit" value="Registriraj se" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

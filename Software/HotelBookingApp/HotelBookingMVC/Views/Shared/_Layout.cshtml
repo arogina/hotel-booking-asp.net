@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -13,7 +15,7 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: #e3f2fd;">
             <div class="container-lg">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="./logo.png" width="180" class="rounded" />
+                    <img src="~/img/logo.png" width="180" class="rounded" />
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -21,12 +23,32 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark fs-5" asp-area="" asp-controller="Home" asp-action="Index">Prijava</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark fs-5" asp-area="" asp-controller="Home" asp-action="Index">Registracija</a>
-                        </li>
+                        @if (Context.Session.GetInt32("id") != null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark fs-5" asp-area="" asp-controller="Authorization" asp-action="Login">Hoteli</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark fs-5" asp-area="" asp-controller="Authorization" asp-action="Login">Rezervacije</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark fs-5" asp-area="" asp-controller="Authorization" asp-action="Login">Računi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark fs-5" asp-area="" asp-controller="Authorization" asp-action="Register">Profil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark fs-5" asp-area="" asp-controller="Authorization" asp-action="Logout">Odjava</a>
+                            </li>
+                        } else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark fs-5" asp-area="" asp-controller="Authorization" asp-action="Login">Prijava</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark fs-5" asp-area="" asp-controller="Authorization" asp-action="Register">Registracija</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

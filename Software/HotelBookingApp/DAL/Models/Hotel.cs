@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace DAL.Models
 {
@@ -16,8 +16,11 @@ namespace DAL.Models
         public string Naziv { get; set; } = null!;
         public string Adresa { get; set; } = null!;
         public string? Opis { get; set; }
+        [Display(Name = "Ocjena")]
         public double? ProsjecnaOcjena { get; set; }
+        [Display(Name = "Broj katova")]
         public int BrojKatova { get; set; }
+        [Display(Name = "Država")]
         public string? OznakaDrzave { get; set; }
 
         public virtual Država? OznakaDrzaveNavigation { get; set; }

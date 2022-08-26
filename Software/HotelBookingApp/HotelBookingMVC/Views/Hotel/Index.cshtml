@@ -1,0 +1,66 @@
+﻿@using Microsoft.AspNetCore.Http;
+@model IEnumerable<DAL.Models.Hotel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center title">Hoteli</h1>
+
+<p>
+    <a asp-action="Create">Stvori novi</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Naziv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Adresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Opis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProsjecnaOcjena)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrojKatova)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OznakaDrzave)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adresa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Opis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProsjecnaOcjena)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrojKatova)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OznakaDrzave)
+            </td>
+            <td>
+                @Html.ActionLink("Uredi", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Izbriši", "Delete", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Pregledaj ponudu", "Details", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

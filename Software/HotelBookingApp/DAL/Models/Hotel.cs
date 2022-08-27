@@ -12,6 +12,7 @@ namespace DAL.Models
             Zaposleniks = new HashSet<Zaposlenik>();
         }
 
+        [Display(Name = "ID")]
         public int HotelId { get; set; }
         public string Naziv { get; set; } = null!;
         public string Adresa { get; set; } = null!;

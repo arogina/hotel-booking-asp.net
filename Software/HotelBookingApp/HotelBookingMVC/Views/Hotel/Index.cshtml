@@ -2,14 +2,18 @@
 @model IEnumerable<DAL.Models.Hotel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Hoteli";
 }
 
 <h1 class="text-center title">Hoteli</h1>
 
-<p>
-    <a asp-action="Create">Stvori novi</a>
-</p>
+@if (Context.Session.GetInt32("tipKorisnika") == 3)
+{
+    <p>
+        <a asp-action="Create">Stvori novi</a>
+    </p>    
+}
+
 <table class="table">
     <thead>
         <tr>
@@ -56,9 +60,13 @@
                 @Html.DisplayFor(modelItem => item.OznakaDrzave)
             </td>
             <td>
-                @Html.ActionLink("Uredi", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Izbriši", "Delete", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Pregledaj ponudu", "Details", new { /* id=item.PrimaryKey */ })
+                    @if (Context.Session.GetInt32("tipKorisnika") == 3)
+                    {
+                        @Html.ActionLink("Uredi", "Edit", new {  id = item.HotelId }) <span>|</span>
+                        @Html.ActionLink("Izbriši", "Delete", new { id = item.HotelId }) <span>|</span>
+                    }
+                @Html.ActionLink("Pregledaj ponudu", "Details", new { id = item.HotelId }) |
+                @Html.ActionLink("Ocijeni", "Rate", new { id = item.HotelId })
             </td>
         </tr>
 }

@@ -18,7 +18,7 @@ namespace DAL.Models
         public string Lozinka { get; set; } = null!;
         public string? Adresa { get; set; }
         public string? PostanskiBroj { get; set; }
-        public int? TipKorisnikaId { get; set; }
+        public int TipKorisnikaId { get; set; }
         public string LozinkaSol { get; set; } = null!;
 
         public virtual TipKorisnika? TipKorisnika { get; set; }

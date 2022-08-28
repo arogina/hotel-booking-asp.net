@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace DAL.Models
 {
@@ -12,8 +13,10 @@ namespace DAL.Models
 
         public int SobaId { get; set; }
         public int BrojSobe { get; set; }
+        [Display(Name = "Broj kata")]
         public int BrojKata { get; set; }
         public int HotelId { get; set; }
+        [Display(Name = "Tip sobe")]
         public int? TipSobeId { get; set; }
         public bool Rezervirana { get; set; }
 

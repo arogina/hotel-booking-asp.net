@@ -56,7 +56,7 @@ namespace HotelBookingMVC.Controllers
             {
                 Korisnik korisnik = _accountRepository.AutentificirajKorisnika(email, lozinka);
                 HttpContext.Session.SetInt32("id", korisnik.KorisnikId);
-                //HttpContext.Session.SetInt32("tipKorisnika", korisnik.TipKorisnikaId); --> promjeniti u bazi TipKorisnikaId u not null
+                HttpContext.Session.SetInt32("tipKorisnika", korisnik.TipKorisnikaId);
             } 
             catch (InvalidAccountEmailException ex)
             {

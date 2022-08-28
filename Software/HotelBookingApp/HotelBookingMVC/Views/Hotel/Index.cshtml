@@ -1,0 +1,74 @@
+﻿@using Microsoft.AspNetCore.Http;
+@model IEnumerable<DAL.Models.Hotel>
+
+@{
+    ViewData["Title"] = "Hoteli";
+}
+
+<h1 class="text-center title">Hoteli</h1>
+
+@if (Context.Session.GetInt32("tipKorisnika") == 3)
+{
+    <p>
+        <a asp-action="Create">Stvori novi</a>
+    </p>    
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Naziv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Adresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Opis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProsjecnaOcjena)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrojKatova)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OznakaDrzave)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adresa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Opis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProsjecnaOcjena)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrojKatova)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OznakaDrzave)
+            </td>
+            <td>
+                @if (Context.Session.GetInt32("tipKorisnika") == 3)
+                {
+                    @Html.ActionLink("Uredi", "Edit", new {  id = item.HotelId }) <span>|</span>
+                    @Html.ActionLink("Izbriši", "Delete", new { id = item.HotelId }) <span>|</span>
+                }
+                @Html.ActionLink("Pregledaj ponudu", "Details", new { id = item.HotelId }) |
+                @Html.ActionLink("Ocijeni", "Rate", new { id = item.HotelId })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

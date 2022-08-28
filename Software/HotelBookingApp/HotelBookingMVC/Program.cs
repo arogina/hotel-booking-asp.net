@@ -1,4 +1,6 @@
 using BLL.Account;
+using BLL.Hotel;
+using BLL.Room;
 using DAL.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<HotelBookingContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Database")));
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<IHotelRepository, HotelRepository>();
+builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
 

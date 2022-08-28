@@ -24,7 +24,9 @@ namespace BLL.Room
 
         public async Task<List<Soba>> DohvatiSobePoHotelu(int hotelId)
         {
-            return await (from s in _bookingContext.Sobas where s.HotelId == hotelId select s).Include("TipSobe").ToListAsync();
+            return await (from s in _bookingContext.Sobas where s.HotelId == hotelId select s)
+                .Include("TipSobe")
+                .ToListAsync();
         }
 
         public async Task<List<Soba>> DohvatiSveSobe()

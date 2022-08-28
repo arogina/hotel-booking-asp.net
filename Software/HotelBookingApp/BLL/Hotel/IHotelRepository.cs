@@ -11,9 +11,9 @@ namespace BLL.Hotel
     {
         public Task<DAL.Models.Hotel> DohvatiHotel(int id);
         public Task<List<DAL.Models.Hotel>> DohvatiSveHotele();
-        public void StvoriHotel(DAL.Models.Hotel hotel);
-        public void IzmjeniHotel(int id, DAL.Models.Hotel hotel);
-        public void IzbrišiHotel(int id);
+        public bool StvoriHotel(DAL.Models.Hotel hotel);
+        public bool IzmjeniHotel(int id, DAL.Models.Hotel hotel);
+        public bool IzbrišiHotel(int id);
         public void DodajOcjenu(int hotelId, int korisnikId, int ocjena);
     }
 }

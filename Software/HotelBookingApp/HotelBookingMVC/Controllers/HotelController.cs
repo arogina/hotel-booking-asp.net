@@ -1,16 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BLL.Hotel;
 using DAL.Models;
+using BLL.Exceptions;
+using BLL.Room;
 
 namespace HotelBookingMVC.Controllers
 {
     public class HotelController : Controller
     {
         private IHotelRepository _hotelRepository;
+        private IRoomRepository _roomRepository;
 
-        public HotelController(IHotelRepository hotelRepository)
+        public HotelController(IHotelRepository hotelRepository, IRoomRepository roomRepository)
         {
             this._hotelRepository = hotelRepository;
+            this._roomRepository = roomRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -68,9 +72,25 @@ namespace HotelBookingMVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Rate(int id, int ocjena)
         {
-            this._hotelRepository.DodajOcjenu(id, (int)HttpContext.Session.GetInt32("id"), ocjena);
+            try
+            {
+                this._hotelRepository.DodajOcjenu(id, (int)HttpContext.Session.GetInt32("id"), ocjena);
+            } catch (AlreadyRatedException ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View();
+            }
 
             return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var sobe = await this._roomRepository.DohvatiSobePoHotelu(id);
+            var hotel = await this._hotelRepository.DohvatiHotel(id);
+            ViewBag.Hotel = hotel.Naziv;
+
+            return View(sobe);
         }
     }
 }

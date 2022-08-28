@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL.Models;
 using Microsoft.EntityFrameworkCore;
+using BLL.Exceptions;
 
 namespace BLL.Hotel
 {
@@ -55,16 +56,22 @@ namespace BLL.Hotel
 
         public void DodajOcjenu(int hotelId, int korisnikId, int ocjena)
         {
-            var hotel = _bookingContext.Hotels.Find(hotelId);
-            _bookingContext.Ocjenios.Add(new Ocjenio
+            Ocjenio ocjenio = new Ocjenio
             {
                 HotelId = hotelId,
                 KorisnikId = korisnikId,
                 Ocjena = ocjena
-            });
+            };
 
+            if (_bookingContext.Ocjenios.Contains(ocjenio))
+            {
+                throw new AlreadyRatedException("Ovaj korisnik je već ocjenio navedeni hotel!");
+            }
+
+            _bookingContext.Ocjenios.Add(ocjenio);
             _bookingContext.SaveChanges();
 
+            var hotel = _bookingContext.Hotels.Find(hotelId);
             int suma = 0;
             int kolicina = 0;
             foreach (var item in _bookingContext.Ocjenios)

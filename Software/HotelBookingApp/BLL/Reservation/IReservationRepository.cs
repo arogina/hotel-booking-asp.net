@@ -9,6 +9,7 @@ namespace BLL.Reservation
 {
     public interface IReservationRepository
     {
+        public Task<Rezervacija> DohvatiRezervaciju(int id);
         public Task<List<Rezervacija>> DohvatiKorisnikoveRezervacije(int korisnikId);
         public bool KreirajRezervaciju(Rezervacija rezervacija);
         public bool IzbrišiRezervaciju(Rezervacija rezervacija);

@@ -19,7 +19,10 @@ namespace BLL.Room
 
         public async Task<Soba> DohvatiSobu(int id)
         {
-            return await _bookingContext.Sobas.FindAsync(id);
+            return await (from s in _bookingContext.Sobas where s.SobaId == id select s)
+                .Include("Hotel")
+                .Include("TipSobe")
+                .FirstAsync();
         }
 
         public async Task<List<Soba>> DohvatiSobePoHotelu(int hotelId)

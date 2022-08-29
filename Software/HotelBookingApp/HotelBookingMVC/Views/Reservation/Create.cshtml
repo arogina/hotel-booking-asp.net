@@ -1,0 +1,53 @@
+﻿@model DAL.Models.Rezervacija
+
+@{
+    ViewData["Title"] = "Rezerviraj sobu";
+}
+
+<h1 class="text-center title">Rezerviraj sobu</h1>
+<p class="text-center error-msg">@ViewBag.Error</p>
+<hr />
+<div class="d-flex justify-content-center">
+    <div class="row w-30">
+        <div class="col">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <input type="number" name="sobaid" value="@ViewBag.SobaId" class="form-control" hidden />
+                </div>
+                <div class="form-group">
+                    <label asp-for="RezervacijaOd" class="control-label"></label>
+                    <input asp-for="RezervacijaOd" class="form-control" />
+                    <span asp-validation-for="RezervacijaOd" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RezervacijaDo" class="control-label"></label>
+                    <input asp-for="RezervacijaDo" class="form-control" />
+                    <span asp-validation-for="RezervacijaDo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="hotel" class="control-label">Hotel:</label>
+                    <input type="text" name="hotel" id="hotel" value="@ViewBag.Hotel" class="form-control" disabled />
+                </div>
+                <div class="form-group">
+                    <label for="tipSobe" class="control-label">Tip sobe:</label>
+                    <input type="text" name="tipSobe" id="tipSobe" value="@ViewBag.TipSobe" class="form-control" disabled />
+                </div>
+                <div class="form-group">
+                    <label for="cijena" class="control-label">Cijena po noćenju:</label>
+                    <input type="text" name="cijena" id="cijena" value="@ViewBag.Cijena" class="form-control" disabled />
+                </div>
+                <div class="form-group submit-btn">
+                    <input type="submit" value="Rezerviraj" class="btn btn-primary" />
+                </div>
+                <div>
+                    <a asp-action="UserReservations">Povratak</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -91,5 +91,14 @@ namespace BLL.Hotel
 
             _bookingContext.SaveChanges();
         }
+
+        public async Task<DAL.Models.Hotel> DohvatiHotelPremaRezervaciji(Rezervacija rezervacija)
+        {
+            return await (from h in _bookingContext.Hotels
+                          join s in _bookingContext.Sobas on h.HotelId equals s.HotelId
+                          join r in _bookingContext.Rezervacijas on s.SobaId equals r.SobaId
+                          where r.RezervacijaId == rezervacija.RezervacijaId
+                          select h).FirstAsync();
+        }
     }
 }

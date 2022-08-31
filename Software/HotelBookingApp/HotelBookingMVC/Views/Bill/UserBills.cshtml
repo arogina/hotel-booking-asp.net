@@ -1,0 +1,51 @@
+﻿@model IEnumerable<DAL.Models.Račun>
+
+@{
+    ViewData["Title"] = "Korisnikovi računi";
+}
+
+<h1>Korisnikovi računi</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RezervacijaId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ZaposlenikId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UkupnaCijena)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Placeno)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RezervacijaId)
+            </td>
+            <td>
+                @item.Zaposlenik.Ime @item.Zaposlenik.Prezime
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UkupnaCijena)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Placeno)
+            </td>
+            <td>
+            @if (Context.Session.GetInt32("tipKorisnika") == 3)
+            {
+                @Html.ActionLink("Poništi račun", "Delete", new { /* id=item.PrimaryKey*/ })   
+            }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

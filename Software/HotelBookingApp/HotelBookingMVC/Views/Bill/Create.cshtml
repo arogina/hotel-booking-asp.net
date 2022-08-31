@@ -1,0 +1,52 @@
+﻿@using DAL.Models
+@model DAL.Models.Račun
+
+@{
+    ViewData["Title"] = "Stvori račun";
+    Hotel hotel = ViewData["Hotel"] as Hotel;
+    Rezervacija rezervacija = ViewData["Rezervacija"] as Rezervacija;
+    IEnumerable<Zaposlenik> zaposlenici = ViewData["Zaposlenici"] as IEnumerable<Zaposlenik>;
+}
+
+<h1 class="text-center title">Stvori račun</h1>
+<p class="text-center error-msg">@ViewBag.Error</p>
+<hr />
+<div class="d-flex justify-content-center">
+<div class="row w-30">
+    <div class="col">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RezervacijaId" class="control-label"></label>
+                <input asp-for="RezervacijaId" class="form-control" value="@rezervacija.RezervacijaId" readonly />
+                <span asp-validation-for="RezervacijaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UkupnaCijena" class="control-label"></label>
+                <input asp-for="UkupnaCijena" value="@ViewBag.UkupnaCijena" class="form-control" readonly />
+                <span asp-validation-for="UkupnaCijena" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZaposlenikId" class="control-label"></label>
+                <select asp-for="ZaposlenikId" class="form-control">
+                    @foreach(var zaposlenik in zaposlenici)
+                    {
+                        <option value="@zaposlenik.ZaposlenikId">@zaposlenik.Ime @zaposlenik.Prezime</option>
+                    }
+                </select>
+                <span asp-validation-for="ZaposlenikId" class="text-danger"></span>
+            </div>
+            <div class="form-group submit-btn">
+                <input type="submit" value="Stvori račun" class="btn btn-primary" />
+            </div>
+            <div>
+                <a asp-action="HotelBills">Povratak</a>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

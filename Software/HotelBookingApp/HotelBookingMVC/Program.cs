@@ -1,6 +1,7 @@
 using BLL.Account;
 using BLL.Hotel;
 using BLL.Room;
+using BLL.Reservation;
 using DAL.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,7 @@ builder.Services.AddDbContext<HotelBookingContext>(options => options.UseSqlServ
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IHotelRepository, HotelRepository>();
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
 

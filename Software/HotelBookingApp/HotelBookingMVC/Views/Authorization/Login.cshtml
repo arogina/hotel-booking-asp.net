@@ -1,0 +1,37 @@
+﻿@model HotelBookingMVC.Models.PrijavaModel
+
+@{
+    ViewData["Title"] = "Prijava";
+}
+
+<h1 class="text-center title">Prijava</h1>
+
+<hr />
+<p class="text-center error-msg">@ViewBag.Error</p>
+
+<div class="d-flex justify-content-center">
+    <div class="row w-30">
+        <div class="col">
+            <form asp-action="Login" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Lozinka" class="control-label"></label>
+                    <input asp-for="Lozinka" class="form-control" />
+                    <span asp-validation-for="Lozinka" class="text-danger"></span>
+                </div>
+                <div class="form-group submit-btn">
+                    <input type="submit" value="Prijavi se" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

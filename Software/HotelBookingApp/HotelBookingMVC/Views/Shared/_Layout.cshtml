@@ -1,30 +1,54 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - HotelBookingMVC</title>
+    <title>Hotel Booking - @ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HotelBookingMVC.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HotelBookingMVC</a>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: #e3f2fd;">
+            <div class="container-lg">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/img/logo.png" width="180" class="rounded" />
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                    <ul class="navbar-nav ms-auto">
+                        @if (Context.Session.GetInt32("id") != null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark fs-5" asp-area="" asp-controller="Hotel" asp-action="Index">Hoteli</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark fs-5" asp-area="" asp-controller="Reservation" asp-action="UserReservations">Rezervacije</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark fs-5" asp-area="" asp-controller="Bill" asp-action="UserBills">Računi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark fs-5" asp-area="" asp-controller="Authorization" asp-action="Index">Profil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark fs-5" asp-area="" asp-controller="Authorization" asp-action="Logout">Odjava</a>
+                            </li>
+                        } else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark fs-5" asp-area="" asp-controller="Authorization" asp-action="Login">Prijava</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark fs-5" asp-area="" asp-controller="Authorization" asp-action="Register">Registracija</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -36,9 +60,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - HotelBookingMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="border-top footer text-muted" style="background-color: #e3f2fd;">
+        <div class="container d-flex justify-content-center">
+            &copy; 2022 - HotelBooking
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

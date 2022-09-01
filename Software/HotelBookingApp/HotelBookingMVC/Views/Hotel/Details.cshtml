@@ -1,0 +1,51 @@
+﻿@using Microsoft.AspNetCore.Http;
+@model IEnumerable<DAL.Models.Soba>
+
+@{
+    ViewData["Title"] = "Sobe";
+}
+
+<h1>@ViewBag.Hotel - Popis soba</h1>
+
+<p>
+    <a asp-action="Create" asp-area="" asp-controller="Room">Stvori sobu</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TipSobeId)
+            </th>
+            <th>
+                Cijena po noćenju (HRK)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervirana)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipSobe.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipSobe.CijenaPoNocenju)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rezervirana)
+            </td>
+            <td>
+                @if (Context.Session.GetInt32("tipKorisnika") == 3) 
+                {
+                    @Html.ActionLink("Uredi", "Edit", "Room", new {  id = item.SobaId }) <span>|</span>
+                    @Html.ActionLink("Izbriši", "Delete", "Room", new { id = item.SobaId }) <span>|</span>
+                }
+                @Html.ActionLink("Rezerviraj", "Create", "Reservation", new { id=item.SobaId })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

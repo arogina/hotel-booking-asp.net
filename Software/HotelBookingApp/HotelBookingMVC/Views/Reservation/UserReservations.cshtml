@@ -1,0 +1,70 @@
+﻿@model IEnumerable<DAL.Models.Rezervacija>
+
+@{
+    ViewData["Title"] = "Rezervacije";
+}
+
+<h1>Rezervacije</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RezervacijaId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DatumRezervacije)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RezervacijaOd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RezervacijaDo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrojNocenja)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KorisnikId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OznakaStatusa)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RezervacijaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatumRezervacije)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RezervacijaOd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RezervacijaDo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrojNocenja)
+            </td>
+            <td>
+                @item.Korisnik.Ime @item.Korisnik.Prezime
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OznakaStatusaNavigation.Naziv)
+            </td>
+            <td>
+                @if (Context.Session.GetInt32("tipKorisnika") == 3)
+                {
+                    @Html.ActionLink("Izradi račun", "Create", "Bill", new { id = item.RezervacijaId }) <span>|</span>
+                }
+                @Html.ActionLink("Otkaži", "Delete", new { id=item.RezervacijaId })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

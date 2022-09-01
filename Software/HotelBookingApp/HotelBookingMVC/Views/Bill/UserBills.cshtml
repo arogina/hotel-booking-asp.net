@@ -42,7 +42,7 @@
             <td>
             @if (Context.Session.GetInt32("tipKorisnika") == 3)
             {
-                @Html.ActionLink("Poništi račun", "Delete", new { /* id=item.PrimaryKey*/ })   
+                @Html.ActionLink("Poništi račun", "Delete", new { rezervacijaId = item.RezervacijaId, zaposlenikId = item.ZaposlenikId })   
             }
             </td>
         </tr>

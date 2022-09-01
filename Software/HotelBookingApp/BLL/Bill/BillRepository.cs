@@ -18,9 +18,11 @@ namespace BLL.Bill
             _bookingContext = bookingContext;
         }
 
-        public async Task<Račun> DohvatiRačun(int id)
+        public async Task<Račun> DohvatiRačun(int rezervacijaId, int zaposlenikId)
         {
-            return await _bookingContext.Računs.FindAsync(id);
+            return await (from r in _bookingContext.Računs
+                          where r.RezervacijaId == rezervacijaId && r.ZaposlenikId == zaposlenikId
+                          select r).FirstAsync();
         }
 
         public async Task<List<Račun>> DohvatiRačuneHotela(int hotelId)
@@ -40,7 +42,10 @@ namespace BLL.Bill
             return await (from r in _bookingContext.Računs
                           join re in _bookingContext.Rezervacijas on r.RezervacijaId equals re.RezervacijaId
                           where re.KorisnikId == korisnikId
-                          select r).ToListAsync();
+                          select r)
+                          .Include("Rezervacija")
+                          .Include("Zaposlenik")
+                          .ToListAsync();
         }
 
         public async Task<bool> IzbrišiRačun(Račun račun)

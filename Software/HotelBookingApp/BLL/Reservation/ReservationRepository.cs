@@ -26,6 +26,7 @@ namespace BLL.Reservation
         {
             return await (from r in _bookingContext.Rezervacijas where r.KorisnikId == korisnikId select r)
                 .Include("Korisnik")
+                .Include("Soba")
                 .Include("OznakaStatusaNavigation")
                 .ToListAsync();
         }

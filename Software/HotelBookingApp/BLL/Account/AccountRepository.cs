@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL.Models;
 using BLL.Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace BLL.Account
 {
@@ -35,6 +36,15 @@ namespace BLL.Account
             if (!Security.IsEqualPassword(lozinka, sol, postojecaLozinka)) throw new WrongAccountPasswordException("Pogrešna lozinka!");
 
             return korisnik;
+        }
+
+        public async Task<Korisnik> DohvatiKorisnika(int id)
+        {
+            return await (from k in _bookingContext.Korisniks 
+                          where k.KorisnikId == id 
+                          select k)
+                          .Include("TipKorisnika")
+                          .FirstAsync();
         }
     }
 }

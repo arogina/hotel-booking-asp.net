@@ -10,6 +10,7 @@ namespace DAL.Models
             Ocjenios = new HashSet<Ocjenio>();
             Sobas = new HashSet<Soba>();
             Zaposleniks = new HashSet<Zaposlenik>();
+            Korisniks = new HashSet<Korisnik>();
         }
 
         [Display(Name = "ID")]
@@ -28,5 +29,6 @@ namespace DAL.Models
         public virtual ICollection<Ocjenio> Ocjenios { get; set; }
         public virtual ICollection<Soba> Sobas { get; set; }
         public virtual ICollection<Zaposlenik> Zaposleniks { get; set; }
+        public virtual ICollection<Korisnik> Korisniks { get; set; }
     }
 }

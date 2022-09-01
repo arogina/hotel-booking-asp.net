@@ -16,6 +16,12 @@ namespace HotelBookingMVC.Controllers
             this._accountRepository = accountRepository;
         }
 
+        public async Task<IActionResult> Index()
+        {
+            var korisnik = await _accountRepository.DohvatiKorisnika((int)HttpContext.Session.GetInt32("id"));
+            return View(korisnik);
+        }
+
         public IActionResult Register()
         {
             return View();

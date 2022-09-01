@@ -73,5 +73,13 @@ namespace HotelBookingMVC.Controllers
 
             return RedirectToAction("UserBills");
         }
+
+        public async Task<IActionResult> Delete(int rezervacijaId, int zaposlenikId)
+        {
+            var račun = await _billRepository.DohvatiRačun(rezervacijaId, zaposlenikId);
+            await _billRepository.IzbrišiRačun(račun);
+
+            return RedirectToAction("UserBills");
+        }
     }
 }

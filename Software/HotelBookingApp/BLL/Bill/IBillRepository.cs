@@ -9,7 +9,7 @@ namespace BLL.Bill
 {
     public interface IBillRepository
     {
-        public Task<Račun> DohvatiRačun(int id);
+        public Task<Račun> DohvatiRačun(int rezervacijaId, int zaposlenikId);
         public Task<List<Račun>> DohvatiRačunePoKorisniku(int korisnikId);
         public Task<List<Račun>> DohvatiRačuneHotela(int hotelId);
         public bool StvoriRačun(Račun račun);

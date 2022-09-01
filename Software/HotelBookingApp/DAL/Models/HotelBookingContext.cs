@@ -82,6 +82,23 @@ namespace DAL.Models
                     .HasForeignKey(d => d.OznakaDrzave)
                     .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("FK_Hotel_Država");
+
+                entity.HasMany(d => d.Korisniks)
+                    .WithMany(p => p.Hotels)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "Moderator",
+                        l => l.HasOne<Korisnik>().WithMany().HasForeignKey("KorisnikId").HasConstraintName("FK_Moderator_Korisnik"),
+                        r => r.HasOne<Hotel>().WithMany().HasForeignKey("HotelId").HasConstraintName("FK_Moderator_Hotel"),
+                        j =>
+                        {
+                            j.HasKey("HotelId", "KorisnikId");
+
+                            j.ToTable("Moderator");
+
+                            j.IndexerProperty<int>("HotelId").HasColumnName("hotel_id");
+
+                            j.IndexerProperty<int>("KorisnikId").HasColumnName("korisnik_id");
+                        });
             });
 
             modelBuilder.Entity<Korisnik>(entity =>
@@ -125,12 +142,14 @@ namespace DAL.Models
                     .IsUnicode(false)
                     .HasColumnName("prezime");
 
-                entity.Property(e => e.TipKorisnikaId).HasColumnName("tip_korisnika_id");
+                entity.Property(e => e.TipKorisnikaId)
+                    .HasColumnName("tip_korisnika_id")
+                    .HasDefaultValueSql("((1))");
 
                 entity.HasOne(d => d.TipKorisnika)
                     .WithMany(p => p.Korisniks)
                     .HasForeignKey(d => d.TipKorisnikaId)
-                    .OnDelete(DeleteBehavior.SetNull)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Korisnik_TipKorisnika");
             });
 
@@ -193,7 +212,8 @@ namespace DAL.Models
 
                 entity.Property(e => e.DatumRezervacije)
                     .HasColumnType("date")
-                    .HasColumnName("datum_rezervacije");
+                    .HasColumnName("datum_rezervacije")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.KorisnikId).HasColumnName("korisnik_id");
 
@@ -201,6 +221,7 @@ namespace DAL.Models
                     .HasMaxLength(1)
                     .IsUnicode(false)
                     .HasColumnName("oznaka_statusa")
+                    .HasDefaultValueSql("('O')")
                     .IsFixedLength();
 
                 entity.Property(e => e.RezervacijaDo)

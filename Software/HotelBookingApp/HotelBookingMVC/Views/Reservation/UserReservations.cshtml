@@ -52,12 +52,16 @@
                 @Html.DisplayFor(modelItem => item.BrojNocenja)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Korisnik.Ime)
+                @item.Korisnik.Ime @item.Korisnik.Prezime
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.OznakaStatusaNavigation.Naziv)
             </td>
             <td>
+                @if (Context.Session.GetInt32("tipKorisnika") == 3)
+                {
+                    @Html.ActionLink("Izradi račun", "Create", "Bill", new { id = item.RezervacijaId }) <span>|</span>
+                }
                 @Html.ActionLink("Otkaži", "Delete", new { id=item.RezervacijaId })
             </td>
         </tr>

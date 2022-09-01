@@ -11,5 +11,6 @@ namespace BLL.Account
     {
         public void RegistrirajKorisnika (Korisnik korisnik);
         public Korisnik AutentificirajKorisnika (string email, string lozinka);
+        public Task<Korisnik> DohvatiKorisnika(int id);
     }
 }

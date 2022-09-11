@@ -12,9 +12,12 @@ namespace DAL.Models
         }
 
         public int SobaId { get; set; }
+        [Required]
+        [Display(Name = "Broj sobe")]
         public int BrojSobe { get; set; }
         [Display(Name = "Broj kata")]
         public int BrojKata { get; set; }
+        [Display(Name = "Hotel")]
         public int HotelId { get; set; }
         [Display(Name = "Tip sobe")]
         public int? TipSobeId { get; set; }

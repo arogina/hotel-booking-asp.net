@@ -89,6 +89,7 @@ namespace HotelBookingMVC.Controllers
             var sobe = await this._roomRepository.DohvatiSobePoHotelu(id);
             var hotel = await this._hotelRepository.DohvatiHotel(id);
             ViewBag.Hotel = hotel.Naziv;
+            ViewBag.HotelId = hotel.HotelId;
 
             return View(sobe);
         }

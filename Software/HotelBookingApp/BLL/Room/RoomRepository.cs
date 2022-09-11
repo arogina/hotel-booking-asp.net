@@ -36,5 +36,32 @@ namespace BLL.Room
         {
             return await _bookingContext.Sobas.ToListAsync();
         }
+
+        public async Task KreirajSobu(Soba soba)
+        {
+            this._bookingContext.Sobas.Add(soba);
+            await this._bookingContext.SaveChangesAsync();
+        }
+
+        public async Task IzmjeniSobu(int id, Soba soba)
+        {
+            var exSoba = _bookingContext.Sobas.Find(id);
+            exSoba.BrojSobe = soba.BrojSobe;
+            exSoba.TipSobeId = soba.TipSobeId;
+            exSoba.BrojKata = soba.BrojKata;
+            await this._bookingContext.SaveChangesAsync();
+        }
+
+        public async Task ObrišiSobu(int sobaId)
+        {
+            var soba = await this._bookingContext.Sobas.FindAsync(sobaId);
+            this._bookingContext.Sobas.Remove(soba);
+            await this._bookingContext.SaveChangesAsync();
+        }
+
+        public async Task<List<TipSobe>> DohvatiTipoveSoba()
+        {
+            return await this._bookingContext.TipSobes.ToListAsync(); 
+        }
     }
 }

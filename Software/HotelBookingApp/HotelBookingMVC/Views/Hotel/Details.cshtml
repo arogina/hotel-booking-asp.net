@@ -8,7 +8,7 @@
 <h1>@ViewBag.Hotel - Popis soba</h1>
 
 <p>
-    <a asp-action="Create" asp-area="" asp-controller="Room">Stvori sobu</a>
+    @Html.ActionLink("Stvori sobu", "Create", "Room", new { hotelId=@ViewBag.HotelId, hotel=@ViewBag.Hotel })
 </p>
 <table class="table">
     <thead>
@@ -40,7 +40,7 @@
             <td>
                 @if (Context.Session.GetInt32("tipKorisnika") == 3) 
                 {
-                    @Html.ActionLink("Uredi", "Edit", "Room", new {  id = item.SobaId }) <span>|</span>
+                    @Html.ActionLink("Uredi", "Edit", "Room", new {  sobaId = item.SobaId, hotelId = @ViewBag.HotelId, hotel = @ViewBag.Hotel }) <span>|</span>
                     @Html.ActionLink("Izbriši", "Delete", "Room", new { id = item.SobaId }) <span>|</span>
                 }
                 @Html.ActionLink("Rezerviraj", "Create", "Reservation", new { id=item.SobaId })
